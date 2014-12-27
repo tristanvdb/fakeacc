@@ -1,0 +1,114 @@
+digraph graph_api_0x834710 {
+  label="";
+  color=black;
+  subgraph cluster_file_0x2ba3062e33a0_0x830bf0 {
+    label="kernel.h";
+    color=black;
+    node_0x2ba3062e33a0 [label="", shape=diamond, color="black", style=filled, fillcolor=black];
+    subgraph cluster_decl_0x2ba306510238_0x82e870 {
+      label="";
+      color=white;
+      node_0x2ba3065b2388 [label="Class Definition", shape=box, color="black", style=filled, fillcolor=darkgoldenrod1];
+      subgraph cluster_class_0x2ba306510238_0x831d50 {
+        label="";
+        style=filled;
+        color=blue;
+        node_0x2ba306510238 [label="Class:\nkernel_desc_t", shape=diamond, color="black", style=filled, fillcolor=cyan];
+      }
+      subgraph cluster_var_0x2ba3063f2f10_0x7e0420 {
+        label="";
+        style=filled;
+        color=green;
+        node_0x2ba3063f2f10 [label="Variable:\nnum_args", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      }
+      subgraph cluster_var_0x2ba3063f3050_0x7ae9c0 {
+        label="";
+        style=filled;
+        color=green;
+        node_0x2ba3063f3050 [label="Variable:\nnum_loops", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      }
+      subgraph cluster_var_0x2ba3063f3190_0x834590 {
+        label="";
+        style=filled;
+        color=green;
+        node_0x2ba3063f3190 [label="Variable:\nloop_desc", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      }
+    }
+    subgraph cluster_decl_0x2ba306510a00_0x8313c0 {
+      label="";
+      color=white;
+      node_0x2ba3065b24b0 [label="Class Definition", shape=box, color="black", style=filled, fillcolor=darkgoldenrod1];
+      subgraph cluster_class_0x2ba306510a00_0x7a7710 {
+        label="";
+        style=filled;
+        color=blue;
+        node_0x2ba306510a00 [label="Class:\nkernel_t", shape=diamond, color="black", style=filled, fillcolor=cyan];
+      }
+      subgraph cluster_var_0x2ba3063f32d0_0x7dc120 {
+        label="";
+        style=filled;
+        color=green;
+        node_0x2ba3063f32d0 [label="Variable:\ndesc", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      }
+      subgraph cluster_var_0x2ba3063f3410_0x833db0 {
+        label="";
+        style=filled;
+        color=green;
+        node_0x2ba3063f3410 [label="Variable:\nargs", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      }
+      subgraph cluster_var_0x2ba3063f3550_0x7da3f0 {
+        label="";
+        style=filled;
+        color=green;
+        node_0x2ba3063f3550 [label="Variable:\nloops", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      }
+    }
+    subgraph cluster_decl_0x2ba306779010_0x7da8b0 {
+      label="";
+      color=white;
+      node_0x2ba3063f3690 [label="Variable:\ndesc", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2ba3066c8010 [label="Parameters", shape=diamond, color="black", style=filled, fillcolor=aquamarine];
+      subgraph cluster_func_0x2ba306779010_0x833ba0 {
+        label="";
+        style=filled;
+        color=red;
+        node_0x2ba306779010 [label="Function:\nbuild_kernel", shape=diamond, color="black", style=filled, fillcolor=cyan];
+      }
+    }
+    subgraph cluster_decl_0x2ba3067793c8_0x73a780 {
+      label="";
+      color=white;
+      node_0x2ba3063f37d0 [label="Variable:\nkernel", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2ba3066c8258 [label="Parameters", shape=diamond, color="black", style=filled, fillcolor=aquamarine];
+      subgraph cluster_func_0x2ba3067793c8_0x73b9b0 {
+        label="";
+        style=filled;
+        color=red;
+        node_0x2ba3067793c8 [label="Function:\nexecute_kernel", shape=diamond, color="black", style=filled, fillcolor=cyan];
+      }
+    }
+    subgraph cluster_var_0x2ba3063f3910_0x832100 {
+      label="";
+      style=filled;
+      color=green;
+      node_0x2ba3063f3910 [label="Variable:\nmy_kernel_desc", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+    }
+  }
+  node_0x2ba3062e33a0 -> node_0x2ba3063f3910 [label="", color="black", constraint="true"];
+  node_0x2ba3062e33a0 -> node_0x2ba306510238 [label="", color="black", constraint="true"];
+  node_0x2ba3062e33a0 -> node_0x2ba306510a00 [label="", color="black", constraint="true"];
+  node_0x2ba3062e33a0 -> node_0x2ba306779010 [label="", color="black", constraint="true"];
+  node_0x2ba3062e33a0 -> node_0x2ba3067793c8 [label="", color="black", constraint="true"];
+  node_0x2ba306510238 -> node_0x2ba3065b2388 [label="", color="black", constraint="true"];
+  node_0x2ba306510a00 -> node_0x2ba3065b24b0 [label="", color="black", constraint="true"];
+  node_0x2ba3065b2388 -> node_0x2ba3063f2f10 [label="", color="black", constraint="true"];
+  node_0x2ba3065b2388 -> node_0x2ba3063f3050 [label="", color="black", constraint="true"];
+  node_0x2ba3065b2388 -> node_0x2ba3063f3190 [label="", color="black", constraint="true"];
+  node_0x2ba3065b24b0 -> node_0x2ba3063f32d0 [label="", color="black", constraint="true"];
+  node_0x2ba3065b24b0 -> node_0x2ba3063f3410 [label="", color="black", constraint="true"];
+  node_0x2ba3065b24b0 -> node_0x2ba3063f3550 [label="", color="black", constraint="true"];
+  node_0x2ba3066c8010 -> node_0x2ba3063f3690 [label="", color="black", constraint="true"];
+  node_0x2ba3066c8258 -> node_0x2ba3063f37d0 [label="", color="black", constraint="true"];
+  node_0x2ba306779010 -> node_0x2ba3066c8010 [label="", color="black", constraint="true"];
+  node_0x2ba3067793c8 -> node_0x2ba3066c8258 [label="", color="black", constraint="true"];
+}

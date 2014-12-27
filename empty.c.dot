@@ -1,0 +1,9 @@
+digraph graph_api_0x834710 {
+  label="";
+  color=black;
+  subgraph cluster_file_0x2ba3062e3010_0x830bf0 {
+    label="empty.c";
+    color=black;
+    node_0x2ba3062e3010 [label="", shape=diamond, color="black", style=filled, fillcolor=black];
+  }
+}
