@@ -1,0 +1,88 @@
+digraph graph_model_0x15dc4d0 {
+  label="";
+  color=black;
+//  subgraph cluster_file_0x2b2807cee3a0_0x173fcf0 {
+//    label="kernel.h";
+//    color=black;
+    node_0x2b2807dfe910 [label="Variable:\nmy_kernel_desc", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+    subgraph cluster_decl_0x2b2807f1b238_0x173fe60 {
+      label="";
+      color=white;
+      node_0x2b2807dfdf10 [label="Variable:\nnum_args", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807dfe050 [label="Variable:\nnum_loops", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807dfe190 [label="Variable:\nloop_desc", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807f1b238 [label="Class:\nkernel_desc_t", shape=diamond, color="black", style=filled, fillcolor=cyan];
+    }
+    subgraph cluster_decl_0x2b2807f1ba00_0x1637c90 {
+      label="";
+      color=white;
+      node_0x2b2807dfe2d0 [label="Variable:\ndesc", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807dfe410 [label="Variable:\nargs", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807dfe550 [label="Variable:\nloops", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807f1ba00 [label="Class:\nkernel_t", shape=diamond, color="black", style=filled, fillcolor=cyan];
+    }
+    node_0x2b2808184010 [label="Function:\nbuild_kernel", shape=diamond, color="black", style=filled, fillcolor=cyan];
+    node_0x2b28081843c8 [label="Function:\nexecute_kernel", shape=diamond, color="black", style=filled, fillcolor=cyan];
+//  }
+//  subgraph cluster_file_0x2b2807cee1d8_0x15934f0 {
+//    label="loop.h";
+//    color=black;
+    subgraph cluster_decl_0x2b2807f1a2a8_0x168a3b0 {
+      label="";
+      color=white;
+      node_0x2b2807dfd510 [label="Variable:\nkind", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807dfd650 [label="Variable:\nparam", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807f1a2a8 [label="Class:\ntile_t", shape=diamond, color="black", style=filled, fillcolor=cyan];
+      subgraph cluster_decl_0x2b2808006010_0x1591ee0 {
+        label="";
+        color=white;
+        node_0x2b2807dfd290 [label="Enumerator:\ne_tile_kind_1", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+        node_0x2b2807dfd3d0 [label="Enumerator:\ne_tile_kind_2", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+        node_0x2b2808006010 [label="SgEnumDeclaration", shape=diamond, color="black", style=filled, fillcolor=cyan];
+      }
+    }
+    subgraph cluster_decl_0x2b2807f1a7d8_0x168b750 {
+      label="";
+      color=white;
+      node_0x2b2807dfd790 [label="Variable:\nnum_tiles", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807dfd8d0 [label="Variable:\ntiles", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807f1a7d8 [label="Class:\nloop_desc_t", shape=diamond, color="black", style=filled, fillcolor=cyan];
+    }
+    subgraph cluster_decl_0x2b2807f1ad08_0x168a670 {
+      label="";
+      color=white;
+      node_0x2b2807dfda10 [label="Variable:\nlower_bound", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807dfdb50 [label="Variable:\nupper_bound", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807dfdc90 [label="Variable:\nincrement", shape=box, color="black", style=filled, fillcolor=lightsalmon];
+      node_0x2b2807f1ad08 [label="Class:\nloop_t", shape=diamond, color="black", style=filled, fillcolor=cyan];
+    }
+//  }
+
+  node_0x2b2807f1a2a8 -> node_0x2b2808006010 [label="", color="black", constraint="true"];
+  node_0x2b2808006010 -> node_0x2b2807dfd290 [label="", color="black", constraint="true"];
+  node_0x2b2808006010 -> node_0x2b2807dfd3d0 [label="", color="black", constraint="true"];
+
+  node_0x2b2807f1a2a8 -> node_0x2b2807dfd510 [label="field[0]", color="green", constraint="true"];
+  node_0x2b2807f1a2a8 -> node_0x2b2807dfd650 [label="field[1]", color="green", constraint="true"];
+  node_0x2b2807f1a7d8 -> node_0x2b2807dfd790 [label="field[0]", color="green", constraint="true"];
+  node_0x2b2807f1a7d8 -> node_0x2b2807dfd8d0 [label="field[1]", color="green", constraint="true"];
+  node_0x2b2807f1ad08 -> node_0x2b2807dfda10 [label="field[0]", color="green", constraint="true"];
+  node_0x2b2807f1ad08 -> node_0x2b2807dfdb50 [label="field[1]", color="green", constraint="true"];
+  node_0x2b2807f1ad08 -> node_0x2b2807dfdc90 [label="field[2]", color="green", constraint="true"];
+  node_0x2b2807f1b238 -> node_0x2b2807dfdf10 [label="field[0]", color="green", constraint="true"];
+  node_0x2b2807f1b238 -> node_0x2b2807dfe050 [label="field[1]", color="green", constraint="true"];
+  node_0x2b2807f1b238 -> node_0x2b2807dfe190 [label="field[2]", color="green", constraint="true"];
+  node_0x2b2807f1ba00 -> node_0x2b2807dfe2d0 [label="field[0]", color="green", constraint="true"];
+  node_0x2b2807f1ba00 -> node_0x2b2807dfe410 [label="field[1]", color="green", constraint="true"];
+  node_0x2b2807f1ba00 -> node_0x2b2807dfe550 [label="field[2]", color="green", constraint="true"];
+
+  node_0x2b2807dfd510 -> node_0x2b2808006010 [label="",          color="blue", constraint="true"];
+  node_0x2b2807dfd8d0 -> node_0x2b2807f1a2a8 [label="(pointer)", color="blue", constraint="true"];
+  node_0x2b2807dfe190 -> node_0x2b2807f1a7d8 [label="(pointer)", color="blue", constraint="true"];
+  node_0x2b2807dfe2d0 -> node_0x2b2807f1b238 [label="(pointer)", color="blue", constraint="true"];
+  node_0x2b2807dfe550 -> node_0x2b2807f1ad08 [label="(pointer)", color="blue", constraint="true"];
+  node_0x2b2807dfe910 -> node_0x2b2807f1b238 [label="(array)",   color="blue", constraint="true"];
+  node_0x2b2808184010 -> node_0x2b2807f1b238 [label="(pointer)", color="blue", constraint="true"];
+  node_0x2b2808184010 -> node_0x2b2807f1ba00 [label="(pointer)", color="blue", constraint="true"];
+  node_0x2b28081843c8 -> node_0x2b2807f1ba00 [label="(pointer)", color="blue", constraint="true"];
+}
