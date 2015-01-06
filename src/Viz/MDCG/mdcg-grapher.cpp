@@ -150,10 +150,9 @@ int main(int argc, char ** argv) {
 
   unsigned model_id = model_builder.create();
 
-  model_builder.add(model_id, "loop",   ".", "h");
-  model_builder.add(model_id, "kernel", ".", "h");
-//  model_builder.add(model_id, "data",   ".", "c");
-//  model_builder.add(model_id, "foo",    ".", "c");
+  model_builder.add(model_id, "tile",   FAKEACC_INC_PATH, "h");
+  model_builder.add(model_id, "loop",   FAKEACC_INC_PATH, "h");
+  model_builder.add(model_id, "kernel", FAKEACC_INC_PATH, "h");
 
   MDCG::Model2GraphViz::Traversal traversal;
 
@@ -259,11 +258,11 @@ int main(int argc, char ** argv) {
   model.toDot(dot_file);
   dot_file.close();
 
-  dot_file.open("model-function.dot");
+  dot_file.open("model-variable.dot");
   model.toDot(dot_file, "", true, false, false);
   dot_file.close();
 
-  dot_file.open("model-variable.dot");
+  dot_file.open("model-function.dot");
   model.toDot(dot_file, "", false, true, false);
   dot_file.close();
 

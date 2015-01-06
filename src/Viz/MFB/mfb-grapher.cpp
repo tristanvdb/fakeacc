@@ -163,21 +163,26 @@ class Traversal : public AST2GraphViz::Cluster {
 
 }
 
+#ifndef FAKEACC_INC_PATH
+#error FAKEACC_INC_PATH
+#endif
+
 int main(int argc, char ** argv) {
   SgProject * project = new SgProject::SgProject(argc, argv);
 
   MFB::Driver<MFB::Sage> driver(project);
 
-  driver.add(boost::filesystem::path("loop.h"));
-  driver.add(boost::filesystem::path("kernel.h"));
-  driver.add(boost::filesystem::path("data.c"));
-  driver.add(boost::filesystem::path("foo.c"));
+  boost::filesystem::path fakeacc_inc_path(FAKEACC_INC_PATH);
+  driver.add(fakeacc_inc_path/boost::filesystem::path("FakeACC/kernel.h"));
+  driver.add(fakeacc_inc_path/boost::filesystem::path("FakeACC/loop.h"));
+  driver.add(fakeacc_inc_path/boost::filesystem::path("FakeACC/tile.h"));
 
   MFB::API2GraphViz::Traversal traversal(driver.getAPI());
 
   std::vector<SgSourceFile *> files = SageInterface::querySubTree<SgSourceFile>(project);
   std::vector<SgSourceFile *>::iterator it_file;
   for (it_file = files.begin(); it_file != files.end(); it_file++) {
+    if ((*it_file)->get_sourceFileNameWithoutPath() == "empty.c") continue;
     std::ofstream dot_file; std::ostringstream oss;
     oss << (*it_file)->get_sourceFileNameWithoutPath() << ".dot";
     dot_file.open(oss.str().c_str());
