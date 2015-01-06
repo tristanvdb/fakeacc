@@ -1,25 +1,24 @@
 
-#ifndef __LOOP_H__
-#define __LOOP_H__
+#include "FakeACC/defs.h"
 
-struct tile_t {
-  enum tile_kind_e {
-    e_tile_kind_1,
-    e_tile_kind_2,
-  } kind;
-  int param;
-};
+#ifndef __FAKEACC_LOOP_H__
+#define __FAKEACC_LOOP_H__
 
+#if FAKEACC_SPACE(__FAKEACC_STATIC__)
 struct loop_desc_t {
+  int idx;
   int num_tiles;
-  struct tile_t * tiles;
+  struct tile_desc_t * tile_desc;
 };
+#endif /* FAKEACC_SPACE */
 
+#if FAKEACC_SPACE_(__FAKEACC_USER__, __FAKEACC_KERNEL__)
 struct loop_t {
-  int lower_bound;
-  int upper_bound;
-  int increment;
+  int lower;
+  int upper;
+  int stride;
 };
+#endif /* FAKEACC_SPACE */
 
-#endif /* __LOOP_H__ */
+#endif /* __FAKEACC_LOOP_H__ */
 

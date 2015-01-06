@@ -1,3 +1,2 @@
 *.o
-mfb-grapher
-mdcg-grapher
+examples/foo
