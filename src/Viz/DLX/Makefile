@@ -22,7 +22,7 @@ bin: grapher
 check: check-grapher
 
 clean:
-	rm -rf grapher *.o *.dot *.png empty.c
+	rm -rf grapher *.o *.dot *.png
 
 ########################
 
@@ -32,11 +32,9 @@ grapher.o: grapher.cpp
 grapher: grapher.o $(AST_TO_GRAPHVIZ_DIR)/lib/default.o $(AST_TO_GRAPHVIZ_DIR)/lib/cluster.o
 	c++ -g $(LIBDIRS) $(LIBS) grapher.o $(AST_TO_GRAPHVIZ_DIR)/lib/default.o $(AST_TO_GRAPHVIZ_DIR)/lib/cluster.o -o grapher
 
-check-grapher: grapher empty.c
-	./grapher -I$(FAKEACC_INC) -DSKIP_ROSE_BUILTIN_DECLARATIONS -c empty.c && ( dot -Tpng tile.h.dot -o tile.png || dot -Tpng loop.h.dot -o loop.png || dot -Tpng kernel.h.dot -o kernel.png )
-
-empty.c:
-	echo > empty.c
+check-grapher: grapher $(FAKEACC_EXAMPLES)/foo.c
+	./grapher -DSKIP_ROSE_BUILTIN_DECLARATIONS -c $(FAKEACC_EXAMPLES)/foo.c
+	dot -Tpng fakeacc.dot -o fakeacc.png
 
 ########################
 

@@ -17,28 +17,23 @@ LIBS=-lMFB-sage -lMDCG -lrose -lboost_filesystem -lboost_system -lboost_iostream
 
 ########################
 
-bin: mdcg-grapher
+bin: grapher
 
-check: check-mdcg-grapher
+check: check-grapher
 
 clean:
-	rm -rf mdcg-grapher *.o *.dot *.png empty.c
+	rm -rf grapher *.o *.dot *.png empty.c
 
 ########################
 
-mdcg-grapher.o: mdcg-grapher.cpp
-	c++ -g $(INCLUDES) -I$(AST_TO_GRAPHVIZ_DIR)/include -DFAKEACC_INC_PATH=\"$(FAKEACC_INC)/FakeACC\" -c mdcg-grapher.cpp -o mdcg-grapher.o
+grapher.o: grapher.cpp
+	c++ -g $(INCLUDES) -I$(AST_TO_GRAPHVIZ_DIR)/include -DFAKEACC_INC_PATH=\"$(FAKEACC_INC)/FakeACC\" -c grapher.cpp -o grapher.o
 
-mdcg-grapher: mdcg-grapher.o $(AST_TO_GRAPHVIZ_DIR)/lib/default.o $(AST_TO_GRAPHVIZ_DIR)/lib/cluster.o
-	c++ -g $(LIBDIRS) $(LIBS) mdcg-grapher.o $(AST_TO_GRAPHVIZ_DIR)/lib/default.o $(AST_TO_GRAPHVIZ_DIR)/lib/cluster.o -o mdcg-grapher
+grapher: grapher.o $(AST_TO_GRAPHVIZ_DIR)/lib/default.o $(AST_TO_GRAPHVIZ_DIR)/lib/cluster.o
+	c++ -g $(LIBDIRS) $(LIBS) grapher.o $(AST_TO_GRAPHVIZ_DIR)/lib/default.o $(AST_TO_GRAPHVIZ_DIR)/lib/cluster.o -o grapher
 
-check-mdcg-grapher: mdcg-grapher empty.c
-	./mdcg-grapher -I$(FAKEACC_INC) -DSKIP_ROSE_BUILTIN_DECLARATIONS -c empty.c
-	dot -Tpng mdcg.dot -o mdcg.png
-	dot -Tpng model.dot -o model.png
-	dot -Tpng model-class.dot -o model-class.png
-	dot -Tpng model-function.dot -o model-function.png
-	dot -Tpng model-variable.dot -o model-variable.png
+check-grapher: grapher empty.c
+	./grapher -I$(FAKEACC_INC) -DSKIP_ROSE_BUILTIN_DECLARATIONS -c empty.c && ( dot -Tpng mdcg.dot -o mdcg.png || dot -Tpng model.dot -o model.png || dot -Tpng model-class.dot -o model-class.png || dot -Tpng model-function.dot -o model-function.png || dot -Tpng model-variable.dot -o model-variable.png )
 
 empty.c:
 	echo > empty.c

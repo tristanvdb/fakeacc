@@ -4,7 +4,6 @@ fakeacc:
 	make -C src fakeacc
 
 viz:
-	make -C lib viz
 	make -C src viz
 
 clean:

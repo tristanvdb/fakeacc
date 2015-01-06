@@ -3,7 +3,7 @@ fakeacc:
 #	make -C FakeACC bin
 
 viz:
-#	make -C Viz bin
+	make -C Viz viz
 
 clean:
 	make -C FakeACC clean
