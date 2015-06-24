@@ -12,7 +12,7 @@ all: compiler
 check: check-foo check-bar check-test_1
 
 clean:
-	rm -f compiler.o compiler
+	rm -f rose_*.c *-kernel.c *.o compiler
 
 ########################
 

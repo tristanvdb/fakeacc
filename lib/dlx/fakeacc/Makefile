@@ -5,7 +5,7 @@ FAKEACC_CONFIG?=
 
 include $(FAKEACC_DIR)/config.mk
 
-lib: clauses.o constructs.o language.o frontend.o
+all: clauses.o constructs.o language.o frontend.o
 
 clauses.o: clauses.cpp
 	g++ -g -O0 $(INCLUDES) -I$(FAKEACC_INC) -c clauses.cpp -o clauses.o

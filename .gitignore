@@ -1,5 +1,6 @@
 *.o
 examples/foo
+examples/foo-fakeacc
 src/compiler
 src/rose_*.c
 src/*-kernel.c

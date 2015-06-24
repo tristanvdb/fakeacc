@@ -5,7 +5,7 @@ FAKEACC_CONFIG?=
 
 include $(FAKEACC_DIR)/config.mk
 
-lib: fakeacc.o
+all: fakeacc.o
 
 fakeacc.o: fakeacc.cpp
 	g++ -g -O0 $(INCLUDES) -I$(FAKEACC_INC) -c fakeacc.cpp -o fakeacc.o
