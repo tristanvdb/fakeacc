@@ -1,8 +1,8 @@
 
-#include "FakeACC/defs.h"
+#include "TileK/defs.h"
 
-#ifndef __FAKEACC_LOOP_H__
-#define __FAKEACC_LOOP_H__
+#ifndef __TILEK_LOOP_H__
+#define __TILEK_LOOP_H__
 
 struct loop_desc_t {
   int idx;
@@ -16,5 +16,5 @@ struct loop_t {
   int stride;
 };
 
-#endif /* __FAKEACC_LOOP_H__ */
+#endif /* __TILEK_LOOP_H__ */
 

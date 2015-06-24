@@ -1,8 +1,8 @@
 
-#include "FakeACC/defs.h"
+#include "TileK/defs.h"
 
-#ifndef __FAKEACC_TILE_H__
-#define __FAKEACC_TILE_H__
+#ifndef __TILEK_TILE_H__
+#define __TILEK_TILE_H__
 
 struct tile_desc_t {
   int idx;
@@ -19,5 +19,5 @@ struct tile_t {
 //int remain;
 };
 
-#endif /* __FAKEACC_TILE_H__ */
+#endif /* __TILEK_TILE_H__ */
 

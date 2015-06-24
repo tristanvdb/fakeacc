@@ -1,13 +1,13 @@
 
-FAKEACC_INC=../include
-FAKEACC_LIB=../lib/fakeacc
+TILEK_INC=../include
+TILEK_LIB=../lib/tilek
 
-all: foo foo-fakeacc
+all: foo foo-tilek
 
-check: check-foo check-foo-fakeacc
+check: check-foo check-foo-tilek
 
 clean:
-	rm -rf foo foo-fakeacc *.o
+	rm -rf foo foo-tilek *.o
 
 # Main
 
@@ -17,7 +17,7 @@ main-foo.o: main-foo.c
 # Original
 
 foo.o: foo.c
-	gcc -g -O0 -I$(FAKEACC_INC) -c foo.c -o foo.o
+	gcc -g -O0 -I$(TILEK_INC) -c foo.c -o foo.o
 
 foo: foo.o main-foo.o
 	gcc foo.o main-foo.o -o foo
@@ -25,25 +25,25 @@ foo: foo.o main-foo.o
 check-foo: foo
 	./foo
 
-# FakeACC
+# TileK
 
-foo-fakeacc.o: rose_foo.c
-	gcc -g -O0 -I$(FAKEACC_INC) -c rose_foo.c -o foo-fakeacc.o
+foo-tilek.o: rose_foo.c
+	gcc -g -O0 -I$(TILEK_INC) -c rose_foo.c -o foo-tilek.o
 
 foo-data.o: foo-data.c
-	gcc -g -O0 -I$(FAKEACC_INC) -c foo-data.c -o foo-data.o
+	gcc -g -O0 -I$(TILEK_INC) -c foo-data.c -o foo-data.o
 
 foo-kernel.o: foo-kernel.c
-	gcc -g -O0 -I$(FAKEACC_INC) -c foo-kernel.c -o foo-kernel.o
+	gcc -g -O0 -I$(TILEK_INC) -c foo-kernel.c -o foo-kernel.o
 
-foo-fakeacc: foo-fakeacc.o foo-data.o foo-kernel.o $(FAKEACC_LIB)/runtime.o main-foo.o
-	gcc foo-fakeacc.o foo-data.o foo-kernel.o $(FAKEACC_LIB)/runtime.o main-foo.o -o foo-fakeacc
+foo-tilek: foo-tilek.o foo-data.o foo-kernel.o $(TILEK_LIB)/runtime.o main-foo.o
+	gcc foo-tilek.o foo-data.o foo-kernel.o $(TILEK_LIB)/runtime.o main-foo.o -o foo-tilek
 
-check-foo-fakeacc: foo-fakeacc
-	./foo-fakeacc
+check-foo-tilek: foo-tilek
+	./foo-tilek
 
 # Libraries
 
-$(FAKEACC_LIB)/runtime.o:
-	make -C $(FAKEACC_LIB) runtime.o
+$(TILEK_LIB)/runtime.o:
+	make -C $(TILEK_LIB) runtime.o
 

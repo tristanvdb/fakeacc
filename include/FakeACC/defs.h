@@ -1,32 +1,32 @@
 
-#ifndef __FAKEACC_DEFS_H__
-#define __FAKEACC_DEFS_H__
+#ifndef __TILEK_DEFS_H__
+#define __TILEK_DEFS_H__
 
-#if defined(__FAKEACC_SPACE__) || defined(__FAKEACC_USER__) || defined(__FAKEACC_STATIC__) || defined(__FAKEACC_KERNEL__)
-#error None of __FAKEACC_*__ macro should be defined.
+#if defined(__TILEK_SPACE__) || defined(__TILEK_USER__) || defined(__TILEK_STATIC__) || defined(__TILEK_KERNEL__)
+#error None of __TILEK_*__ macro should be defined.
 #endif
 
-#define __FAKEACC_NONE__     0
-#define __FAKEACC_USER__     1
-#define __FAKEACC_STATIC__   2
-#define __FAKEACC_KERNEL__  3
+#define __TILEK_NONE__     0
+#define __TILEK_USER__     1
+#define __TILEK_STATIC__   2
+#define __TILEK_KERNEL__  3
 
-#if defined(FAKEACC_FORCED)
-#define __FAKEACC_SPACE__ __FAKEACC_NONE__
-#elif  defined(FAKEACC_USER) && !defined(FAKEACC_STATIC) && !defined(FAKEACC_KERNEL)
-#define __FAKEACC_SPACE__ __FAKEACC_USER__
-#elif !defined(FAKEACC_USER) &&  defined(FAKEACC_STATIC) && !defined(FAKEACC_KERNEL)
-#define __FAKEACC_SPACE__ __FAKEACC_STATIC__
-#elif !defined(FAKEACC_USER) && !defined(FAKEACC_STATIC) &&  defined(FAKEACC_KERNEL)
-#define __FAKEACC_SPACE__ __FAKEACC_KERNEL__
-#elif !defined(FAKEACC_USER) && !defined(FAKEACC_STATIC) && !defined(FAKEACC_KERNEL)
-#define __FAKEACC_SPACE__ __FAKEACC_NONE__
+#if defined(TILEK_FORCED)
+#define __TILEK_SPACE__ __TILEK_NONE__
+#elif  defined(TILEK_USER) && !defined(TILEK_STATIC) && !defined(TILEK_KERNEL)
+#define __TILEK_SPACE__ __TILEK_USER__
+#elif !defined(TILEK_USER) &&  defined(TILEK_STATIC) && !defined(TILEK_KERNEL)
+#define __TILEK_SPACE__ __TILEK_STATIC__
+#elif !defined(TILEK_USER) && !defined(TILEK_STATIC) &&  defined(TILEK_KERNEL)
+#define __TILEK_SPACE__ __TILEK_KERNEL__
+#elif !defined(TILEK_USER) && !defined(TILEK_STATIC) && !defined(TILEK_KERNEL)
+#define __TILEK_SPACE__ __TILEK_NONE__
 #else
-#error More than one FAKEACC_* macro are defined.
+#error More than one TILEK_* macro are defined.
 #endif
 
-#define FAKEACC_SPACE(s1) (__FAKEACC_SPACE__ == __FAKEACC_NONE__ || __FAKEACC_SPACE__ == s1)
-#define FAKEACC_SPACE_(s1, s2) (__FAKEACC_SPACE__ == __FAKEACC_NONE__ || __FAKEACC_SPACE__ == s1 || __FAKEACC_SPACE__ == s2)
+#define TILEK_SPACE(s1) (__TILEK_SPACE__ == __TILEK_NONE__ || __TILEK_SPACE__ == s1)
+#define TILEK_SPACE_(s1, s2) (__TILEK_SPACE__ == __TILEK_NONE__ || __TILEK_SPACE__ == s1 || __TILEK_SPACE__ == s2)
 
-#endif /* __FAKEACC_DEFS_H__ */
+#endif /* __TILEK_DEFS_H__ */
 

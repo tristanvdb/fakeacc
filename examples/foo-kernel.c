@@ -1,9 +1,9 @@
 
-#define FAKEACC_KERNEL 1
+#define TILEK_KERNEL 1
 
-#include "FakeACC/kernel.h"
-#include "FakeACC/loop.h"
-#include "FakeACC/tile.h"
+#include "TileK/kernel.h"
+#include "TileK/loop.h"
+#include "TileK/tile.h"
 
 #include <stdio.h>
 

@@ -1,15 +1,15 @@
 
-FAKEACC_DIR?=../../..
-FAKEACC_FLAGS?=
-FAKEACC_CONFIG?=
+TILEK_DIR?=../../..
+TILEK_FLAGS?=
+TILEK_CONFIG?=
 
-include $(FAKEACC_DIR)/config.mk
+include $(TILEK_DIR)/config.mk
 
-all: fakeacc.o
+all: tilek.o
 
-fakeacc.o: fakeacc.cpp
-	g++ -g -O0 $(INCLUDES) -I$(FAKEACC_INC) -c fakeacc.cpp -o fakeacc.o
+tilek.o: tilek.cpp
+	g++ -g -O0 $(INCLUDES) -I$(TILEK_INC) -c tilek.cpp -o tilek.o
 
 clean:
-	rm -f fakeacc.o
+	rm -f tilek.o
 

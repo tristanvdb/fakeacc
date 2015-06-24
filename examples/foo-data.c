@@ -1,9 +1,9 @@
 
-#define FAKEACC_STATIC 1
+#define TILEK_STATIC 1
 
-#include "FakeACC/loop.h"
-#include "FakeACC/kernel.h"
-#include "FakeACC/tile.h"
+#include "TileK/loop.h"
+#include "TileK/kernel.h"
+#include "TileK/tile.h"
 
 extern kernel_func_ptr kernel_0;
 

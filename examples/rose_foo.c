@@ -1,8 +1,8 @@
 
-#define FAKEACC_USER 1
+#define TILEK_USER 1
 
-#include "FakeACC/loop.h"
-#include "FakeACC/kernel.h"
+#include "TileK/loop.h"
+#include "TileK/kernel.h"
 
 void foo(int n, int m, float ** A, float b) {
   struct kernel_t * kernel = build_kernel(0);

@@ -1,9 +1,9 @@
 
-FAKEACC_DIR?=..
-FAKEACC_FLAGS?=
-FAKEACC_CONFIG?=
+TILEK_DIR?=..
+TILEK_FLAGS?=
+TILEK_CONFIG?=
 
-include $(FAKEACC_DIR)/config.mk
+include $(TILEK_DIR)/config.mk
 
 ########################
 
@@ -16,20 +16,20 @@ clean:
 
 ########################
 
-compiler.o: compiler.cpp $(FAKEACC_INC)/DLX/FakeACC/language.hpp $(FAKEACC_INC)/KLT/FakeACC/fakeacc.hpp 
-	c++ -g $(INCLUDES) -DFAKEACC_INC_PATH=\"$(FAKEACC_INC)\" -c compiler.cpp -o compiler.o
+compiler.o: compiler.cpp $(TILEK_INC)/DLX/TileK/language.hpp $(TILEK_INC)/KLT/TileK/tilek.hpp 
+	c++ -g $(INCLUDES) -DTILEK_INC_PATH=\"$(TILEK_INC)\" -c compiler.cpp -o compiler.o
 
-compiler: compiler.o $(FAKEACC_LIB)/dlx/fakeacc/language.o \
-                     $(FAKEACC_LIB)/dlx/fakeacc/frontend.o \
-                     $(FAKEACC_LIB)/dlx/fakeacc/clauses.o \
-                     $(FAKEACC_LIB)/dlx/fakeacc/constructs.o \
-                     $(FAKEACC_LIB)/klt/fakeacc/fakeacc.o
+compiler: compiler.o $(TILEK_LIB)/dlx/tilek/language.o \
+                     $(TILEK_LIB)/dlx/tilek/frontend.o \
+                     $(TILEK_LIB)/dlx/tilek/clauses.o \
+                     $(TILEK_LIB)/dlx/tilek/constructs.o \
+                     $(TILEK_LIB)/klt/tilek/tilek.o
 	c++ -g $(LIBDIRS) $(LIBS) \
-                                  $(FAKEACC_LIB)/dlx/fakeacc/language.o \
-                                  $(FAKEACC_LIB)/dlx/fakeacc/frontend.o \
-                                  $(FAKEACC_LIB)/dlx/fakeacc/clauses.o \
-                                  $(FAKEACC_LIB)/dlx/fakeacc/constructs.o \
-                                  $(FAKEACC_LIB)/klt/fakeacc/fakeacc.o \
+                                  $(TILEK_LIB)/dlx/tilek/language.o \
+                                  $(TILEK_LIB)/dlx/tilek/frontend.o \
+                                  $(TILEK_LIB)/dlx/tilek/clauses.o \
+                                  $(TILEK_LIB)/dlx/tilek/constructs.o \
+                                  $(TILEK_LIB)/klt/tilek/tilek.o \
                                   compiler.o \
                                -o compiler
 
@@ -41,27 +41,27 @@ check-bar: rose_bar.c
 
 check-test_1: rose_test_1.c
 
-rose_%.c: $(FAKEACC_EXAMPLES)/%.c  compiler
-	./compiler -DSKIP_ROSE_BUILTIN_DECLARATIONS -I$(FAKEACC_INC) -c $<
+rose_%.c: $(TILEK_EXAMPLES)/%.c  compiler
+	./compiler -DSKIP_ROSE_BUILTIN_DECLARATIONS -I$(TILEK_INC) -c $<
 
 ########################
 
-$(FAKEACC_LIB)/dlx/fakeacc/language.o:
-	make -C $(FAKEACC_LIB)/dlx/fakeacc language.o
+$(TILEK_LIB)/dlx/tilek/language.o:
+	make -C $(TILEK_LIB)/dlx/tilek language.o
 
-$(FAKEACC_LIB)/dlx/fakeacc/frontend.o:
-	make -C $(FAKEACC_LIB)/dlx/fakeacc frontend.o
+$(TILEK_LIB)/dlx/tilek/frontend.o:
+	make -C $(TILEK_LIB)/dlx/tilek frontend.o
 
-$(FAKEACC_LIB)/dlx/fakeacc/clauses.o:
-	make -C $(FAKEACC_LIB)/dlx/fakeacc clauses.o
+$(TILEK_LIB)/dlx/tilek/clauses.o:
+	make -C $(TILEK_LIB)/dlx/tilek clauses.o
 
-$(FAKEACC_LIB)/dlx/fakeacc/constructs.o:
-	make -C $(FAKEACC_LIB)/dlx/fakeacc constructs.o
+$(TILEK_LIB)/dlx/tilek/constructs.o:
+	make -C $(TILEK_LIB)/dlx/tilek constructs.o
 
 ########################
 
-$(FAKEACC_LIB)/klt/fakeacc/fakeacc.o:
-	make -C $(FAKEACC_LIB)/klt/fakeacc fakeacc.o
+$(TILEK_LIB)/klt/tilek/tilek.o:
+	make -C $(TILEK_LIB)/klt/tilek tilek.o
 
 ########################
 

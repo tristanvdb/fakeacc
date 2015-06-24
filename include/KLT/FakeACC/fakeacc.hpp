@@ -1,13 +1,13 @@
 
-#ifndef __KLT_FAKEACC_HPP__
-#define __KLT_FAKEACC_HPP__
+#ifndef __KLT_TILEK_HPP__
+#define __KLT_TILEK_HPP__
 
 #include "KLT/Core/mfb-klt.hpp"
 #include "KLT/Core/kernel.hpp"
 #include "KLT/Core/loop-trees.hpp"
 #include "KLT/Core/loop-tiler.hpp"
 
-#include "DLX/FakeACC/language.hpp"
+#include "DLX/TileK/language.hpp"
 #include "DLX/klt-annotations.hpp"
 
 #include "MFB/Sage/driver.hpp"
@@ -25,13 +25,13 @@ namespace MDCG { namespace Model { class model_t; } }
 namespace DLX {
 
 template <>
-void KLT_Annotation<DLX::FakeACC::language_t>::parseRegion(std::vector<DLX::KLT_Annotation<DLX::FakeACC::language_t> > & container);
+void KLT_Annotation<DLX::TileK::language_t>::parseRegion(std::vector<DLX::KLT_Annotation<DLX::TileK::language_t> > & container);
 
 template <>
-void KLT_Annotation<DLX::FakeACC::language_t>::parseData(std::vector<DLX::KLT_Annotation<DLX::FakeACC::language_t> > & container);
+void KLT_Annotation<DLX::TileK::language_t>::parseData(std::vector<DLX::KLT_Annotation<DLX::TileK::language_t> > & container);
 
 template <>
-void KLT_Annotation<DLX::FakeACC::language_t>::parseLoop(std::vector<DLX::KLT_Annotation<DLX::FakeACC::language_t> > & container);
+void KLT_Annotation<DLX::TileK::language_t>::parseLoop(std::vector<DLX::KLT_Annotation<DLX::TileK::language_t> > & container);
 
 }
 
@@ -47,7 +47,7 @@ struct None {
 
 namespace Runtime {
 
-class FakeACC {
+class TileK {
   public:
     enum tile_kind_e {
       e_static_tile = 0,
@@ -89,7 +89,7 @@ class FakeACC {
 
     enum exec_mode_t { e_default };
 
-    static struct fakeacc_kernel_api_t {
+    static struct tilek_kernel_api_t {
       SgClassSymbol * context_class;
         SgClassSymbol * context_loop_class;
         SgVariableSymbol * context_loop_field;
@@ -100,11 +100,11 @@ class FakeACC {
         SgVariableSymbol * context_tile_field;
           SgVariableSymbol * context_tile_length_field;
           SgVariableSymbol * context_tile_stride_field;
-    } fakeacc_kernel_api;
+    } tilek_kernel_api;
 
-    static struct fakeacc_host_api_t {
+    static struct tilek_host_api_t {
       // TODO
-    } fakeacc_host_api;
+    } tilek_host_api;
 
     static void loadAPI(const MDCG::Model::model_t & model);
     static void useSymbolsKernel(MFB::Driver<MFB::Sage> & driver, unsigned long file_id);
@@ -114,41 +114,41 @@ class FakeACC {
 }
 
 template <>
-LoopTiler<DLX::KLT_Annotation<DLX::FakeACC::language_t>, Language::None, Runtime::FakeACC>::loop_tiling_t::loop_tiling_t(LoopTrees<DLX::KLT_Annotation<DLX::FakeACC::language_t> >::loop_t * loop_);
+LoopTiler<DLX::KLT_Annotation<DLX::TileK::language_t>, Language::None, Runtime::TileK>::loop_tiling_t::loop_tiling_t(LoopTrees<DLX::KLT_Annotation<DLX::TileK::language_t> >::loop_t * loop_);
 
 }
 
 namespace MFB {
 
-typedef ::KLT::Kernel< ::DLX::KLT_Annotation< ::DLX::FakeACC::language_t>, ::KLT::Language::None, ::KLT::Runtime::FakeACC> fakeacc_kernel_t;
+typedef ::KLT::Kernel< ::DLX::KLT_Annotation< ::DLX::TileK::language_t>, ::KLT::Language::None, ::KLT::Runtime::TileK> tilek_kernel_t;
 
 template <>
-class KLT<fakeacc_kernel_t> {
+class KLT<tilek_kernel_t> {
   public:
-    typedef ::DLX::KLT_Annotation< ::DLX::FakeACC::language_t> Annotation;
+    typedef ::DLX::KLT_Annotation< ::DLX::TileK::language_t> Annotation;
     typedef ::KLT::Language::None Language;
-    typedef ::KLT::Runtime::FakeACC Runtime;
+    typedef ::KLT::Runtime::TileK Runtime;
 
     struct object_desc_t {
       unsigned id;
-      fakeacc_kernel_t * kernel;
+      tilek_kernel_t * kernel;
       unsigned long file_id;
       std::map<
-        ::KLT::LoopTrees< ::DLX::KLT_Annotation< ::DLX::FakeACC::language_t> >::loop_t *,
-        ::KLT::LoopTiler<DLX::KLT_Annotation<DLX::FakeACC::language_t>, Language::None, Runtime::FakeACC>::loop_tiling_t *
+        ::KLT::LoopTrees< ::DLX::KLT_Annotation< ::DLX::TileK::language_t> >::loop_t *,
+        ::KLT::LoopTiler<DLX::KLT_Annotation<DLX::TileK::language_t>, Language::None, Runtime::TileK>::loop_tiling_t *
       > tiling;
 
       object_desc_t(
         unsigned id_,
-        fakeacc_kernel_t * kernel_,
+        tilek_kernel_t * kernel_,
         unsigned long file_id_
       );
     };
 
-    typedef fakeacc_kernel_t::kernel_desc_t * build_result_t;
+    typedef tilek_kernel_t::kernel_desc_t * build_result_t;
 };
 
 }
 
-#endif /* __KLT_FAKEACC_HPP__ */
+#endif /* __KLT_TILEK_HPP__ */
 

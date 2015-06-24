@@ -1,13 +1,13 @@
 /*!
  * 
- * \file DLX/FakeACC/language.hpp
+ * \file DLX/TileK/language.hpp
  *
  * \author Tristan Vanderbruggen
  *
  */
 
-#ifndef __DLX_FAKEACC_LANGUAGE_HPP__
-#define __DLX_FAKEACC_LANGUAGE_HPP__
+#ifndef __DLX_TILEK_LANGUAGE_HPP__
+#define __DLX_TILEK_LANGUAGE_HPP__
 
 #include "DLX/Core/constructs.hpp"
 #include "DLX/Core/clauses.hpp"
@@ -25,7 +25,7 @@ class SgExpression;
 
 namespace DLX {
 
-namespace FakeACC {
+namespace TileK {
 
 struct language_t {
   static std::string language_label;
@@ -65,30 +65,30 @@ struct language_t {
 namespace Directives {
 
 template <>
-generic_construct_t<FakeACC::language_t> * buildConstruct<FakeACC::language_t>(FakeACC::language_t::construct_kinds_e kind);
+generic_construct_t<TileK::language_t> * buildConstruct<TileK::language_t>(TileK::language_t::construct_kinds_e kind);
 
 template <>
-generic_clause_t<FakeACC::language_t> * buildClause<FakeACC::language_t>(FakeACC::language_t::clause_kinds_e kind);
+generic_clause_t<TileK::language_t> * buildClause<TileK::language_t>(TileK::language_t::clause_kinds_e kind);
  
 template <>
-bool parseClauseParameters<FakeACC::language_t>(
+bool parseClauseParameters<TileK::language_t>(
   std::string & directive_str,
   SgLocatedNode * directive_node,
-  generic_clause_t<FakeACC::language_t> * clause
+  generic_clause_t<TileK::language_t> * clause
 );
 
 //////
 
 template <>
 template <>
-struct generic_construct_t<FakeACC::language_t>::assoc_nodes_t<FakeACC::language_t::e_construct_kernel> {
+struct generic_construct_t<TileK::language_t>::assoc_nodes_t<TileK::language_t::e_construct_kernel> {
   SgScopeStatement * parent_scope;
   SgStatement * kernel_region;
 };
 
 template <>
 template <>
-struct generic_construct_t<FakeACC::language_t>::assoc_nodes_t<FakeACC::language_t::e_construct_loop> {
+struct generic_construct_t<TileK::language_t>::assoc_nodes_t<TileK::language_t::e_construct_loop> {
   SgScopeStatement * parent_scope;
   SgForStatement   * for_loop;
 };
@@ -97,13 +97,13 @@ struct generic_construct_t<FakeACC::language_t>::assoc_nodes_t<FakeACC::language
 
 template <>
 template <>
-struct generic_clause_t<FakeACC::language_t>::parameters_t<FakeACC::language_t::e_clause_data> {
+struct generic_clause_t<TileK::language_t>::parameters_t<TileK::language_t::e_clause_data> {
   std::vector<Frontend::data_sections_t> data_sections;
 };
 
 template <>
 template <>
-struct generic_clause_t<FakeACC::language_t>::parameters_t<FakeACC::language_t::e_clause_tile> {
+struct generic_clause_t<TileK::language_t>::parameters_t<TileK::language_t::e_clause_tile> {
   size_t order;
   enum kind_e {
     e_static_tile,
@@ -117,5 +117,5 @@ struct generic_clause_t<FakeACC::language_t>::parameters_t<FakeACC::language_t::
 
 }
 
-#endif /* __DLX_FAKEACC_LANGUAGE_HPP__ */
+#endif /* __DLX_TILEK_LANGUAGE_HPP__ */
 

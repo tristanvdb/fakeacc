@@ -3,9 +3,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "FakeACC/kernel.h"
-#include "FakeACC/loop.h"
-#include "FakeACC/tile.h"
+#include "TileK/kernel.h"
+#include "TileK/loop.h"
+#include "TileK/tile.h"
 
 struct kernel_t * build_kernel(int idx) {
   struct kernel_desc_t * desc = &(kernel_desc[idx]);
@@ -39,7 +39,7 @@ void execute_kernel(struct kernel_t * kernel) {
     const int loop_idx = desc->loop_desc[loop_it].idx;
 
     int length = kernel->loops[loop_idx].upper - kernel->loops[loop_idx].lower;
-//  printf("[FAKEACC] loops[%d] = %d to %d (%d) : %d tiles\n", loop_it, kernel->loops[loop_idx].lower, kernel->loops[loop_idx].upper, length, desc->loop_desc[loop_it].num_tiles);
+//  printf("[TILEK] loops[%d] = %d to %d (%d) : %d tiles\n", loop_it, kernel->loops[loop_idx].lower, kernel->loops[loop_idx].upper, length, desc->loop_desc[loop_it].num_tiles);
 
     kernel->tiles[desc->loop_desc[loop_it].num_tiles-1].stride = kernel->loops[loop_idx].stride;
 
@@ -49,7 +49,7 @@ void execute_kernel(struct kernel_t * kernel) {
       const int tile_idx = desc->loop_desc[loop_it].tile_desc[tile_it].idx;
       const int param = desc->loop_desc[loop_it].tile_desc[tile_it].param;
 
-//    printf("[FAKEACC]   loops[%d].tiles[%d] : #%d\n", loop_idx, tile_it, tile_idx);
+//    printf("[TILEK]   loops[%d].tiles[%d] : #%d\n", loop_idx, tile_it, tile_idx);
 
       kernel->tiles[tile_idx].length = length;
 
@@ -64,7 +64,7 @@ void execute_kernel(struct kernel_t * kernel) {
 
       assert(kernel->tiles[tile_idx].stride > 0);
 
-//    printf("[FAKEACC]   > #%d : %d by %d\n", tile_idx, loop_idx, tile_it);
+//    printf("[TILEK]   > #%d : %d by %d\n", tile_idx, loop_idx, tile_it);
 
 //    kernel->tiles[tile_idx].remain = length % kernel->tiles[tile_idx].stride;
 
@@ -72,14 +72,14 @@ void execute_kernel(struct kernel_t * kernel) {
     }
 
     if (dyn_tile != desc->loop_desc[loop_it].num_tiles) {
-//    printf("[FAKEACC] Dynamic: loops[%d].tiles[%d] : #%d\n", loop_idx, dyn_tile, desc->loop_desc[loop_it].tile_desc[dyn_tile].idx);
+//    printf("[TILEK] Dynamic: loops[%d].tiles[%d] : #%d\n", loop_idx, dyn_tile, desc->loop_desc[loop_it].tile_desc[dyn_tile].idx);
 
       int stride = kernel->loops[loop_idx].stride;
       for (tile_it = desc->loop_desc[loop_it].num_tiles - 1; tile_it > dyn_tile; tile_it--) {
         const int tile_idx = desc->loop_desc[loop_it].tile_desc[tile_it].idx;
         const int param = desc->loop_desc[loop_it].tile_desc[tile_it].param;
 
-//      printf("[FAKEACC]   loops[%d].tiles[%d] : #%d\n", loop_idx, tile_it, tile_idx);
+//      printf("[TILEK]   loops[%d].tiles[%d] : #%d\n", loop_idx, tile_it, tile_idx);
 
         if (desc->loop_desc[loop_it].tile_desc[tile_it].kind == e_tile_dynamic) {
           assert(dyn_tile == loop_it);
@@ -96,7 +96,7 @@ void execute_kernel(struct kernel_t * kernel) {
         }
         else assert(kernel->tiles[tile_idx].length = stride * param);
 
-//    printf("[FAKEACC]   > #%d : %d by %d\n", tile_idx, loop_idx, tile_it);
+//    printf("[TILEK]   > #%d : %d by %d\n", tile_idx, loop_idx, tile_it);
 
         stride = kernel->tiles[tile_idx].length;
       }
@@ -115,7 +115,7 @@ void execute_kernel(struct kernel_t * kernel) {
         assert(dyn_tile > 0);
         kernel->tiles[tile_idx].stride = kernel->tiles[desc->loop_desc[loop_it].tile_desc[dyn_tile - 1].idx].stride / kernel->tiles[desc->loop_desc[loop_it].tile_desc[dyn_tile + 1].idx].length;
       }
-//    printf("[FAKEACC] > (DYN) loops[%d].tiles[%d] = %d by %d : #%d\n", loop_idx, dyn_tile, kernel->tiles[tile_idx].length, kernel->tiles[tile_idx].stride, tile_idx);
+//    printf("[TILEK] > (DYN) loops[%d].tiles[%d] = %d by %d : #%d\n", loop_idx, dyn_tile, kernel->tiles[tile_idx].length, kernel->tiles[tile_idx].stride, tile_idx);
     }
   }
 

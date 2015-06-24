@@ -1,11 +1,11 @@
 
 all:
-	make -C fakeacc all
-	make -C dlx/fakeacc all
-	make -C klt/fakeacc all
+	make -C tilek all
+	make -C dlx/tilek all
+	make -C klt/tilek all
 
 clean:
-	make -C fakeacc clean
-	make -C dlx/fakeacc clean
-	make -C klt/fakeacc clean
+	make -C tilek clean
+	make -C dlx/tilek clean
+	make -C klt/tilek clean
 

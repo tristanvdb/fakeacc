@@ -1,8 +1,8 @@
 
-#include "FakeACC/defs.h"
+#include "TileK/defs.h"
 
-#ifndef __FAKEACC_KERNEL_H__
-#define __FAKEACC_KERNEL_H__
+#ifndef __TILEK_KERNEL_H__
+#define __TILEK_KERNEL_H__
 
 struct loop_t;
 struct tile_t;

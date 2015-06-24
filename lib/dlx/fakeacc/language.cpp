@@ -2,13 +2,13 @@
 #include "DLX/Core/directives.hpp"
 #include "DLX/Core/constructs.hpp"
 #include "DLX/Core/clauses.hpp"
-#include "DLX/FakeACC/language.hpp"
+#include "DLX/TileK/language.hpp"
 
 #include <cassert>
 
 namespace DLX {
 
-namespace FakeACC {
+namespace TileK {
 
 std::string language_t::language_label;
 language_t::construct_label_map_t language_t::s_construct_labels;
@@ -17,7 +17,7 @@ language_t::clause_labels_map_t language_t::s_clause_labels;
 language_t::directives_relation_label_map_t language_t::s_directives_relation_labels;
 
 void language_t::init() {
-  language_label = "fakeacc";
+  language_label = "tilek";
 
   Directives::setConstructLabel<language_t>(e_construct_kernel, "kernel");
   Directives::setConstructLabel<language_t>(e_construct_loop, "loop");

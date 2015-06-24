@@ -2,7 +2,7 @@
 #include "DLX/Core/parser.hpp"
 #include "DLX/Core/compiler.hpp"
 
-#include "DLX/FakeACC/language.hpp"
+#include "DLX/TileK/language.hpp"
 
 #include "KLT/Core/loop-trees.hpp"
 #include "KLT/Core/data.hpp"
@@ -14,7 +14,7 @@
 #include "KLT/Core/kernel.hpp"
 #include "KLT/Core/mfb-klt.hpp"
 
-#include "KLT/FakeACC/fakeacc.hpp"
+#include "KLT/TileK/tilek.hpp"
 
 #include "MFB/Sage/driver.hpp"
 #include "MFB/Sage/class-declaration.hpp"
@@ -26,8 +26,8 @@
 #include <cassert>
 
 typedef ::KLT::Language::None Language;
-typedef ::KLT::Runtime::FakeACC Runtime;
-typedef ::DLX::KLT_Annotation< ::DLX::FakeACC::language_t> Annotation;
+typedef ::KLT::Runtime::TileK Runtime;
+typedef ::DLX::KLT_Annotation< ::DLX::TileK::language_t> Annotation;
 typedef ::KLT::LoopTrees<Annotation> LoopTrees;
 typedef ::KLT::Kernel<Annotation, Language, Runtime> Kernel;
 
@@ -211,26 +211,26 @@ int main(int argc, char ** argv) {
 
   std::string basename = filename.substr(0, filename.find_last_of('.'));
 
-  DLX::FakeACC::language_t::init();
+  DLX::TileK::language_t::init();
 
-  DLX::Frontend::Frontend<DLX::FakeACC::language_t> frontend;
+  DLX::Frontend::Frontend<DLX::TileK::language_t> frontend;
   bool res = frontend.parseDirectives(project);
   assert(res);
 
   // TODO generate DLX::VIZ
 
-  std::map<DLX::Directives::directive_t<DLX::FakeACC::language_t> *, LoopTrees *> loop_trees;
+  std::map<DLX::Directives::directive_t<DLX::TileK::language_t> *, LoopTrees *> loop_trees;
   std::map<SgForStatement *, LoopTrees::loop_t *> loop_map;
 
-  std::vector<DLX::Directives::directive_t<DLX::FakeACC::language_t> *>::const_iterator it_directive;
+  std::vector<DLX::Directives::directive_t<DLX::TileK::language_t> *>::const_iterator it_directive;
   for (it_directive = frontend.graph_entry.begin(); it_directive != frontend.graph_entry.end(); it_directive++) {
-    DLX::Directives::directive_t<DLX::FakeACC::language_t> * directive = *it_directive;
-    assert(directive->construct->kind == DLX::FakeACC::language_t::e_construct_kernel);
-    DLX::Directives::construct_t<DLX::FakeACC::language_t, DLX::FakeACC::language_t::e_construct_kernel> * construct =
-                 (DLX::Directives::construct_t<DLX::FakeACC::language_t, DLX::FakeACC::language_t::e_construct_kernel> *)(directive->construct);
+    DLX::Directives::directive_t<DLX::TileK::language_t> * directive = *it_directive;
+    assert(directive->construct->kind == DLX::TileK::language_t::e_construct_kernel);
+    DLX::Directives::construct_t<DLX::TileK::language_t, DLX::TileK::language_t::e_construct_kernel> * construct =
+                 (DLX::Directives::construct_t<DLX::TileK::language_t, DLX::TileK::language_t::e_construct_kernel> *)(directive->construct);
 
     LoopTrees * loop_tree = new LoopTrees();
-      loop_trees.insert(std::pair<DLX::Directives::directive_t<DLX::FakeACC::language_t> *, LoopTrees *>(directive, loop_tree));
+      loop_trees.insert(std::pair<DLX::Directives::directive_t<DLX::TileK::language_t> *, LoopTrees *>(directive, loop_tree));
     std::vector<SgVariableSymbol *> iterators;
     std::vector<SgVariableSymbol *> locals;
     std::vector<SgVariableSymbol *> others;
@@ -280,12 +280,12 @@ int main(int argc, char ** argv) {
   }
 
   for (it_directive = frontend.directives.begin(); it_directive != frontend.directives.end(); it_directive++) {
-    DLX::Directives::directive_t<DLX::FakeACC::language_t> * directive = *it_directive;
+    DLX::Directives::directive_t<DLX::TileK::language_t> * directive = *it_directive;
 
-    if (directive->construct->kind != DLX::FakeACC::language_t::e_construct_loop) continue;
+    if (directive->construct->kind != DLX::TileK::language_t::e_construct_loop) continue;
 
-    DLX::Directives::construct_t<DLX::FakeACC::language_t, DLX::FakeACC::language_t::e_construct_loop> * construct =
-                 (DLX::Directives::construct_t<DLX::FakeACC::language_t, DLX::FakeACC::language_t::e_construct_loop> *)(directive->construct);
+    DLX::Directives::construct_t<DLX::TileK::language_t, DLX::TileK::language_t::e_construct_loop> * construct =
+                 (DLX::Directives::construct_t<DLX::TileK::language_t, DLX::TileK::language_t::e_construct_loop> *)(directive->construct);
     assert(construct->assoc_nodes.for_loop != NULL);
 
     std::map<SgForStatement *, LoopTrees::loop_t *>::const_iterator it_loop = loop_map.find(construct->assoc_nodes.for_loop);
@@ -293,23 +293,23 @@ int main(int argc, char ** argv) {
 
     LoopTrees::loop_t * loop = it_loop->second;
 
-    const std::vector<DLX::Directives::generic_clause_t<DLX::FakeACC::language_t> *> & clauses = directive->clause_list;
-    std::vector<DLX::Directives::generic_clause_t<DLX::FakeACC::language_t> *>::const_iterator it_clause;
+    const std::vector<DLX::Directives::generic_clause_t<DLX::TileK::language_t> *> & clauses = directive->clause_list;
+    std::vector<DLX::Directives::generic_clause_t<DLX::TileK::language_t> *>::const_iterator it_clause;
     for (it_clause = clauses.begin(); it_clause != clauses.end(); it_clause++) {
-      loop->annotations.push_back(DLX::KLT_Annotation<DLX::FakeACC::language_t>(*it_clause));
+      loop->annotations.push_back(DLX::KLT_Annotation<DLX::TileK::language_t>(*it_clause));
     }
   }
 
   MFB::KLT_Driver driver(project);
   MDCG::ModelBuilder model_builder(driver);
 
-  unsigned fakeacc_model = model_builder.create();
+  unsigned tilek_model = model_builder.create();
 
-  model_builder.add(fakeacc_model, "tile",   std::string(FAKEACC_INC_PATH) + "/FakeACC", "h");
-  model_builder.add(fakeacc_model, "loop",   std::string(FAKEACC_INC_PATH) + "/FakeACC", "h");
-  model_builder.add(fakeacc_model, "kernel", std::string(FAKEACC_INC_PATH) + "/FakeACC", "h");
+  model_builder.add(tilek_model, "tile",   std::string(TILEK_INC_PATH) + "/TileK", "h");
+  model_builder.add(tilek_model, "loop",   std::string(TILEK_INC_PATH) + "/TileK", "h");
+  model_builder.add(tilek_model, "kernel", std::string(TILEK_INC_PATH) + "/TileK", "h");
 
-  Runtime::FakeACC::loadAPI(model_builder.get(fakeacc_model));
+  Runtime::TileK::loadAPI(model_builder.get(tilek_model));
 
 // TODO MDCG::StaticInitializer static_initializer(driver);
 
@@ -321,7 +321,7 @@ int main(int argc, char ** argv) {
   );
 
   std::vector<Kernel::kernel_desc_t *> all_kernels;
-  std::map<DLX::Directives::directive_t<DLX::FakeACC::language_t> *, LoopTrees *>::const_iterator it_loop_tree;
+  std::map<DLX::Directives::directive_t<DLX::TileK::language_t> *, LoopTrees *>::const_iterator it_loop_tree;
   for (it_loop_tree = loop_trees.begin(); it_loop_tree != loop_trees.end(); it_loop_tree++) {
 //  it_loop_tree->second->toText(std::cout);
 
