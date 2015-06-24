@@ -1,10 +1,12 @@
 
-fakeacc:
-	make -C lib fakeacc
-	make -C src fakeacc
+all:
+	make -C lib all
+	make -C src all
+	make -C examples all
 
-viz:
-	make -C src viz
+check:
+	make -C examples check
+	make -C src check
 
 clean:
 	make -C lib clean

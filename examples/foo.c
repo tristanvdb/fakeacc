@@ -1,8 +1,13 @@
 
-void foo(int n, float ** a, float b) {
-  #pragma fakeacc kernel data(a[0:n][0:n], b)
-  #pragma fakeacc loop tile(static, 64) tile(dynamic)
-  for (int i = 0; i < n; i++)
-    a[i][i]+=b;
+void foo(int n, int m, float ** A, float b) {
+  int i, j;
+  #pragma fakeacc kernel data(A[0:n][0:n], b)
+  {
+  #pragma fakeacc loop tile[0](static, 2) tile[2](dynamic) tile[3](static, 4) 
+  for (i = 0; i < n; i++)
+    #pragma fakeacc loop tile[1](static, 2) tile[4](dynamic)
+    for (j = 0; j < m; j++)
+      A[i][j]+=b;
+  }
 }
 

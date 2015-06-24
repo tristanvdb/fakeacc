@@ -1,2 +1,5 @@
 *.o
 examples/foo
+src/compiler
+src/rose_*.c
+src/*-kernel.c
